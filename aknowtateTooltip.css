@@ -1,0 +1,362 @@
+.popupMenuClass {
+    display: flex;
+    position: relative;
+    flex-flow: row;
+
+
+    height: 40px;
+    width: 165px;
+
+    background-color: #e8faff;
+    border: 1px solid darkgray;
+    border-radius: 3px;
+
+    justify-content: center;
+    vertical-align: center;
+
+    z-index: 1;
+    box-shadow: 0 0 4px 0 gray;
+
+    visibility: hidden;
+}
+
+#colorPopup {
+    position: absolute;
+    bottom: 0;
+}
+
+.popupMenuClassItem{
+    height: 100%;
+    width: 40px;
+
+}
+
+
+#ak1 {
+    border-right: 1px solid darkgray;
+
+    padding-bottom: 1px;
+}
+
+#ak2 {
+    width: 30px !important;
+    padding-left: 5px;
+    padding-right: 5px;
+
+    border-left: 1px solid darkgray;
+    border-right: 1px solid darkgray;
+
+
+    padding-bottom: 1px;
+
+}
+
+#ak3 {
+    height: 32px !important;
+    width: 32px !important;
+
+    padding-left: 4px;
+    padding-right: 4px;
+
+
+    border-left: 1px solid darkgray;
+    border-right: 1px solid darkgray;
+
+    padding-top: 4px;
+    padding-bottom: 5px;
+
+}
+
+#ak4 {
+    height: 32px !important;
+    width: 32px !important;
+
+    padding-left: 4px;
+    padding-right: 4px;
+    padding-top: 4px;
+    padding-bottom: 5px;
+
+    border-left: 1px solid darkgray;
+}
+
+
+
+
+.annotationMenuClass {
+    height: 50px;
+    width: 200px;
+    padding: 0;
+    border-radius: 4px;
+    margin-left: 0px;
+    margin-right: 0px;
+
+    text-align: center;
+    display:flex;
+    justify-content:center;
+    align-items:center
+
+}
+
+.annotationTextClass {
+    vertical-align: middle;
+
+    text-align: left;
+    align-self: center;
+    width: 92%;
+
+    background: lightgray;
+    border-radius: 10px;
+
+    resize: none;
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-right: auto;
+    margin-left: auto;
+
+
+}
+
+
+ #aknowtateContainer {
+
+     position: absolute;
+
+     height: 100px;
+     width: 200px;
+
+     background-color: #e8faff;
+     border: 1px solid darkgray;
+     border-radius: 3px;
+
+     justify-content: center;
+     vertical-align: center;
+
+     z-index: 1;
+     box-shadow: 0 0 4px 0 gray;
+
+ }
+
+ .aknowtateContainer {
+     visibility: hidden;
+ }
+
+ .aknowtateContainer.show {
+     visibility: visible;
+ }
+
+#annotateHeader {
+
+    cursor: pointer;
+
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+
+    top: 0;
+    height: 15px;
+    width: 100%;
+    background-color: #6edbff;
+
+    box-shadow: 0 1px 5px 1px #7187a3;
+}
+
+#annotateTextArea {
+    resize: none;
+    background: transparent;
+    border: none;
+    height: 85px;
+    width: 200px;
+    text-decoration: none;
+    padding: 5px;
+
+}
+#annotateTextArea:focus, input:focus{
+    outline: none;
+}
+
+
+.AKNOWTATE-HIGHLIGHT {
+    position: relative;
+}
+
+.AKNOWTATE-TEXT:hover {
+    cursor: pointer;
+}
+
+.AKNOWTATE-TEXT {
+    transition: filter 150ms ease-in-out;
+}
+
+
+/*
+.popupMenuClass {
+    background: gray;
+    height: 80px;
+    width: 300px;
+
+    visibility: hidden;
+    border-radius: 20px;
+    padding: 0;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+
+    text-align: center;
+    display:flex;
+    justify-content:center;
+    align-items:center
+
+}
+ */
+
+.popupMenuClass.show{
+    visibility: visible !important;
+}
+
+/*
+.popupMenuClassItem {
+    vertical-align: middle;
+    margin-top: 8px;
+
+}
+
+ */
+
+#AKNOWTATE-POPUP-TEXTAREA {
+    position: absolute;
+
+
+
+}
+
+#AKNOWTATE-POPUP-TEXTAREA-MENU {
+    cursor: pointer;
+    position: absolute;
+    z-index: 1;
+    bottom: 0;
+    visibility: hidden;
+}
+/*
+#AKNOWTATE-POPUP-TEXTAREA-MENU.show {
+    visibility: visible !important;
+} */
+
+
+
+/**
+#AKNOWTATE-POPUP-TEXTAREA-MENU.show {
+    visibility: visible !important;
+} */
+
+#AKNOWTATE-POPUP-REFERENCE {
+    cursor: pointer;
+    position: absolute;
+    z-index: 1;
+    visibility: hidden;
+    bottom: 0;
+
+
+
+}
+
+#AKNOWTATE-POPUP-REFERENCE.show {
+    visibility: visible;
+}
+
+
+@-webkit-keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+
+@keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity:1 ;}
+}
+
+.popupSpan {
+    position: absolute;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.colorSelection {
+    margin: 5px;
+    width: 30px;
+    height: 30px;
+    box-shadow: 0 0 4px 0 lightgray;
+    cursor: pointer;
+}
+#colorP1{
+    background-color: yellow;
+
+}
+#colorP2{
+    background-color: powderblue;
+}
+#colorP3{
+    background-color: lightpink;
+}
+#colorP4{
+    background-color: white;
+    position: relative;
+}
+#colorInput {
+    visibility: hidden;
+
+}
+
+#customColorImg {
+    position: absolute;
+    width: 80%;
+    height: 80%;
+    z-index: 4;
+    margin-top: 10%;
+}
+
+#inputLabel {
+
+    display: flex;
+    justify-content: center;
+    align-content: center;
+
+    z-index: 1;
+    position: absolute;
+    background-color: white;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+}
+
+
+/*
+.popupSpan .show  {
+    visibility: visible !important;
+    -webkit-animation: fadeIn 0.15s;
+    animation: fadeIn 0.15s
+}
+/*
+.popupSpan::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #555 transparent transparent transparent;
+} */
+/**
+.popupSpan {
+    visibility: hidden;
+    width: 120px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    padding: 5px 0;
+    border-radius: 6px;
+
+    /* Position the tooltip text - see examples below! */ /*
+    position: absolute;
+    z-index: 1;
+}

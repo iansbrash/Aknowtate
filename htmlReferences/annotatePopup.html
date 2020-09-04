@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+
+<body>
+<style>
+    #aknowtateContainer {
+
+        position: absolute;
+
+        height: 100px;
+        width: 200px;
+
+        background-color: #e8faff;
+        border: 1px solid darkgray;
+        border-radius: 3px;
+
+        justify-content: center;
+        vertical-align: center;
+
+        z-index: 1;
+        box-shadow: 0 0 4px 0 gray;
+
+    }
+
+    #annotateHeader {
+
+        cursor: pointer;
+
+        border-top-left-radius: 3px;
+        border-top-right-radius: 3px;
+
+        top: 0;
+        height: 15px;
+        width: 100%;
+        background-color: #6edbff;
+
+        box-shadow: 0 1px 5px 1px #7187a3;
+    }
+
+    #annotateTextArea {
+        resize: none;
+        background: transparent;
+        border: none;
+        height: 85px;
+        width: 200px;
+        text-decoration: none;
+        padding: 5px;
+
+    }
+    #annotateTextArea:focus, input:focus{
+        outline: none;
+    }
+
+</style>
+<div id="aknowtateContainer">
+    <div id="annotateHeader">
+
+    </div>
+    <div id="textareaContainer">
+        <textarea id="annotateTextArea" placeholder="Enter text here!">
+
+        </textarea>
+    </div>
+</div>
+
+<script>
+
+    dragElement(document.getElementById("aknowtateContainer"))
+    /** Copied straight from w3schools */
+    /** https://www.w3schools.com/howto/howto_js_draggable.asp */
+    function dragElement(elmnt) {
+        var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+        if (document.getElementById("annotateHeader")) {
+            // if present, the header is where you move the DIV from:
+            document.getElementById("annotateHeader").onmousedown = dragMouseDown;
+        } else {
+            // otherwise, move the DIV from anywhere inside the DIV:
+            elmnt.onmousedown = dragMouseDown;
+        }
+
+        function dragMouseDown(e) {
+            e = e || window.event;
+            e.preventDefault();
+            // get the mouse cursor position at startup:
+            pos3 = e.clientX;
+            pos4 = e.clientY;
+            document.onmouseup = closeDragElement;
+            // call a function whenever the cursor moves:
+            document.onmousemove = elementDrag;
+        }
+
+        function elementDrag(e) {
+            e = e || window.event;
+            e.preventDefault();
+            // calculate the new cursor position:
+            pos1 = pos3 - e.clientX;
+            pos2 = pos4 - e.clientY;
+            pos3 = e.clientX;
+            pos4 = e.clientY;
+            // set the element's new position:
+            elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
+            elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+        }
+
+        function closeDragElement() {
+            // stop moving when mouse button is released:
+            document.onmouseup = null;
+            document.onmousemove = null;
+        }
+    }
+</script>
+
+
+</body>
+</html>

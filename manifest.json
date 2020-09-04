@@ -1,0 +1,99 @@
+{
+  "name": "Aknowtate",
+  "version": "1.0",
+  "manifest_version": 2,
+  "description": "Aknowtate testing",
+  "background": {
+    "scripts": [
+      "background.js",
+      "jquery-3.5.1.min.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "jquery-3.5.1.min.js",
+        "/contentScripts/highlightTry6.js",
+        "/contentScripts/changeColor.js",
+        "/contentScripts/storeHighlights.js",
+        "/contentScripts/highlightHelper.js",
+        "/contentScripts/loadHighlights.js",
+        "findPathToNode.js",
+        "initializeAllHighlights.js",
+        "/helperFunctions/UIFunctions.js",
+        "/helperFunctions/initializeUIFunctions.js"
+      ],
+      "css": [
+        "aknowtateTooltip.css"
+      ],
+      "all_frames": true
+    }
+  ],
+  "permissions": [
+    "<all_urls>",
+    "contextMenus",
+    "tabs",
+    "notifications",
+    "http://*/",
+    "https://*/",
+    "storage",
+    "declarativeContent"
+  ],
+  "commands": {
+    "highlightTextCommand": {
+      "suggested_key": {
+        "default": "Alt+Shift+X",
+        "mac": "Command+Shift+X"
+      },
+      "description": "Highlight selected text."
+    },
+    "clearStorageDeleteHighlights": {
+      "suggested_key": {
+        "default": "Alt+Shift+D"
+      },
+      "description": "Delete highlighted text on page"
+    },
+    "changeHighlightColorCommand": {
+      "suggested_key": {
+        "default": "Alt+Shift+C"
+      },
+      "description": "Change highlighter color"
+    },
+    "_execute_browser_action": {
+      "suggested_key": {
+        "windows": "Ctrl+Shift+Y",
+        "mac": "Command+Shift+Y",
+        "chromeos": "Ctrl+Shift+U",
+        "linux": "Ctrl+Shift+J"
+      }
+    }
+  },
+  "web_accessible_resources": [
+    "aknowtateTooltip.css",
+    "UI_Test.html",
+    "UI_Test2.html",
+    "images/popup_images/copy_text.png",
+    "images/popup_images/aknowtate_text.png",
+    "images/popup_images/change_color.png",
+    "images/popup_images/close_popup.png",
+    "UIFunctions.js",
+    "images/popup_images/aknowtate_medium.png",
+    "images/popup_images/highlight_img.png",
+    "/images/repo_images/trash.png",
+    "images/popup_images/custom_color.png"
+
+  ],
+  "browser_action": {
+    "default_popup": "popup.html",
+    "default_icon": "images/manifest_images/aknowtatepng.png"
+  },
+  "icons": {
+    "16": "images/manifest_images/aknowtatepng.png",
+    "32": "images/manifest_images/aknowtatepng.png",
+    "48": "images/manifest_images/aknowtatepng.png",
+    "128": "images/manifest_images/aknowtatepng.png"
+  }
+}
