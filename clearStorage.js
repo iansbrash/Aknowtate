@@ -8,7 +8,6 @@ chrome.storage.sync.get("settings", function (values) {
         console.log("storaged cleared");
         console.log("beginning to cleanse page of highlights...");
 
-
         /** TODO: Support cleansing highlights by color */
         let elements = document.getElementsByClassName("AKNOWTATE-TEXT");
 
@@ -16,14 +15,7 @@ chrome.storage.sync.get("settings", function (values) {
             element.className = "";
             element.style.background = "";
         })
-
-        /**
-        chrome.storage.sync.set({settings: settings}, function () {
-            console.log("Successfully preserved settings: " + settings);
-        })
-         */
     });
-
 })
 
 

@@ -1,7 +1,5 @@
 /** Used in UI_Test2.html. Copies the selected highlight to clipboard */
 function copyText(){
-
-
     chrome.storage.sync.get(window.location.href, function (values){
         let highlights = values[window.location.href];
 
@@ -33,21 +31,16 @@ function copyText(){
 
 /** Lets user add annotation using contentEditable element */
 function addAknowtation() {
+    /** We want to close the first popup since we're now opening another popup (the annotation popup) */
     closeAllPopups();
-
-
     let popupID = getUI_ID();
 
-
     chrome.storage.sync.get(window.location.href, function (highlights) {
-
-
         console.log("Annotation icon clicked. Here is the ID we are working with (getUI_ID): " + popupID);
 
         highlights = highlights[window.location.href];
 
         let currentIndex = 0;
-
 
         console.log("For loop about to start. Here's the popupID we got the the UI_ID function: " + popupID);
         for (; currentIndex < highlights.length; currentIndex++){
@@ -63,49 +56,24 @@ function addAknowtation() {
         let aknowtateTextAreaSpan = document.getElementById("aknowtateContainer");
         let aknowtateTextArea = document.getElementById("annotateTextArea")
 
-
-
-
         aknowtateTextAreaSpan.classList.toggle("show");
-        //aknowtateTextAreaSpan.style.visibility = "visible";
-
 
         if (highlights[currentIndex].annotation == null){
             aknowtateTextArea.value = null;
         } else {
             aknowtateTextArea.value = highlights[currentIndex].annotation;
         }
+        /** Adjusts the popup's size based on how much text is in there */
         autoResize();
+
+        /** Resets size in the case of opening different annotation popups on the same page visit */
         document.getElementById("aknowtateContainer").style.top = "-" + document.getElementById("aknowtateContainer").style.height;
-
         document.getElementById("aknowtateContainer").style.left = "0";
-
-
-            //console.log("SHIT B, THER WERE SOMETHING STORED HERE");
-
-/**
-            let header = document.createElement("div");
-            header.id = aknowtateTextAreaSpan.id + "header";
-            header.style.background = "gray";
-            aknowtateTextAreaSpan.appendChild(header);
-
-            dragElement(aknowtateTextAreaSpan);
-
- */
         let firstSpan = document.getElementsByClassName("popupSpan " + popupID)[0];
 
+        /** Appends the popup so we can see it */
         firstSpan.appendChild(aknowtateTextAreaSpan);
     })
-
-
-
-
-
-
-
-
-
-
 }
 
 function changeTextColor(color){
@@ -117,9 +85,7 @@ function changeTextColor(color){
         highlights = highlights[window.location.href];
 
         let popupID = getUI_ID();
-
         let idIndex = 0
-
         let currentID;
 
         for (; idIndex < highlights.length; idIndex++){
@@ -131,15 +97,6 @@ function changeTextColor(color){
 
         highlights[idIndex].color = color;
 
-        /*
-        if (highlights[idIndex].color === "yellow"){
-            highlights[idIndex].color = "pink";
-        } else {
-            highlights[idIndex].color = "yellow";
-        }
-        */
-
-
         let elementsToChangeColor = document.getElementsByClassName("AKNOWTATE-TEXT " + popupID);
 
         for (let i = 0; i < elementsToChangeColor.length; i++){
@@ -149,10 +106,7 @@ function changeTextColor(color){
         chrome.storage.sync.set({[window.location.href]: highlights}, function () {
             console.log("done changing color");
         })
-
-
     })
-
 }
 
 function deleteHighlight() {
@@ -165,7 +119,7 @@ function deleteHighlight() {
             let currentID = highlights[i].uniqueID;
 
             if (currentID === ID){
-                console.log("found the fucking highlgihtd!!!")
+                console.log("Found the highlight");
                 break;
             }
         }
@@ -180,7 +134,6 @@ function deleteHighlight() {
         } else {
             chrome.storage.sync.set({[window.location.href]: highlights}, function () {
                 /** Now we have to remove the styling */
-
             })
         }
 
@@ -192,10 +145,7 @@ function deleteHighlight() {
             elClone.className = "deletedHighlight";
             element.parentNode.replaceChild(elClone, element);
         })
-
-
     })
-
 }
 
 function closeAllPopups() {
@@ -221,17 +171,12 @@ function getUI_ID() {
     return parseInt(ID);
 }
 
-
-
 function autoResize() {
-
-
-
     let textarea = document.getElementById("annotateTextArea");
 
     console.log("autoResize() called. Here's the ID we're working with: " + textarea.className);
-
     console.log("Attempting to resize annotation box");
+
     if (textarea.scrollHeight < 150){
         textarea.style.height = 'auto';
         textarea.style.height = textarea.scrollHeight + 'px';
@@ -242,21 +187,17 @@ function autoResize() {
     }
 }
 
+/** Automatically stores annotations in chrome.storage whenever user inputs text */
 function autoSave() {
-
     let textarea = document.getElementById("annotateTextArea");
-
     let popupID = getUI_ID();
-
-    console.log("autoSave() called. Here's the ID we're working with: " + popupID);
-
     let textareaText = textarea.value;
 
+    console.log("autoSave() called. Here's the ID we're working with: " + popupID);
 
     chrome.storage.sync.get(window.location.href, function (highlights){
 
         highlights = highlights[window.location.href];
-
 
         let currentIndex = 0;
 
@@ -277,81 +218,40 @@ function autoSave() {
             chrome.storage.sync.get(window.location.href, function (items){
                 console.log("Here's the value we just stored in the textarea: " + highlights[currentIndex].annotation);
                 console.log("stored here: " + window.location.href);
-                console.log("extra shit: " + items[window.location.href][currentIndex].annotation);
-
+                console.log("extra stuff: " + items[window.location.href][currentIndex].annotation);
             })
-
         })
-
     })
-
 }
 
-
-
 function openUI (thisID) {
-
     let popup = document.getElementById("AKNOWTATE-POPUP-REFERENCE");
-
     let uniqueId = thisID
 
-    //if (!toCopy.classList.contains(uniqueId)) {
     popup.className = "popupMenuClass " + uniqueId;
 
     console.log("You clicked on a highlight with ID " + uniqueId);
 
     let firstSpan = document.getElementsByClassName("popupSpan " + uniqueId)[0];
 
-
-    /** THIS IS THE FIRST CHANGE I AM MAKING COMMAND Z UIBPIUASBDIUPASBDPUISBADIUBASUIODB
-     * AJSBDIPUASHDPUIASHDPOASDPOASHD
-     */
-
-
-    /** THIS SHIT WAS THE PROBLE<
-     firstSpan.style.display = "flex";
-     firstSpan.style.justifyContent = "center";
-     */
-
-    // toCopy.style.visibility = "visible";
-    //let toCopyClone = $(toCopy).clone();
-    //firstSpan.parentNode.insertBefore(toCopy, firstSpan.nextSibling);
-
     firstSpan.appendChild(popup);
-    //this.insertBefore(toCopy, firstSpan);
-
-    //}
-    /**
-     if (popup_html.style.visibility === "hidden"){
-                            popup_html.style.visibility = "visible"
-                        } else {
-                            popup_html.style.visibility = "hidden";
-                        } */
 
     popup.classList.toggle("show");
-
-
 }
-
-
 
 function openColorPopup () {
     closeAllPopups();
 
     let ID = getUI_ID();
-
     let firstSpan = document.getElementsByClassName("popupSpan " + ID)[0];
-
-
     let colorPopup = document.getElementById("colorPopup");
 
     firstSpan.appendChild(colorPopup);
-
     colorPopup.classList.toggle("show");
-
 }
 
 
+/** Got this from w3schools */
 function dragElement(elmnt) {
     var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
     if (document.getElementById("annotateHeader")) {

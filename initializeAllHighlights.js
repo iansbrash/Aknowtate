@@ -1,6 +1,5 @@
 /** This file is for adding event listeners to add highlights on a page. Supposed to be called when the page is loaded (so in storeHighlights.js) */
 
-
 /** Here's the plan:
  *  use chrome.storage.sync.get to get all the highlights for the page
  *  for each uniqueID, add an event listener that waits for a mouse click
@@ -24,37 +23,9 @@ function initialize() {
 
     let thisId, thisColor;
 
-
-    /** ALTERNATE IMPLEMENTATION: When highlighting a selection using highlightViaSwim, add an event listener for that unique ID at the very beginning
-     * This also solves the problem of this function only being activated on page load
-     */
-    /**
-    $(document).on('mouseenter', ".AKNOWTATE-TEXT", function () {
-        thisId = this.classList[1];
-
-        thisColor = this.style.background;
-
-        $(".AKNOWTATE-TEXT." + thisId).each(function (index, element) {
-            this.style.background = "powderblue";
-        })
-    }).on('mouseleave', ".AKNOWTATE-TEXT", function () {
-
-        $(".AKNOWTATE-TEXT." + thisId).each(function (index, element) {
-            this.style.background = thisColor;
-        })
-    }) */
-
-
-
     chrome.storage.sync.get(window.location.href, function(highlightList) {
 
         highlightList = highlightList[window.location.href];
-
-
-
-
-
-
 
         for (let i = 0; i < highlightList.length; i++) {
 
@@ -68,16 +39,7 @@ function initialize() {
 
             for (let i = 0; i < elementsToInitialize.length; i++) {
                 console.log("Iterating through element #" + i);
-
                     elementsToInitialize[i].addEventListener("click", function () {openUI(currentID)});
-
-/**
-/**
-                    elementsToInitialize[i].addEventListener("focusout", function () {
-                        if (document.getElementById("AKNOWTATE-POPUP-REFERENCE").classList.contains("show")){
-                            document.getElementById("AKNOWTATE-POPUP-REFERENCE").classList.toggle("show");
-                        }
-                    }) */
             }
         }
     })

@@ -1,7 +1,5 @@
 /** This file gets executed every time the popup_html.html is opened (can't use inline js in chrome popup_html) */
 window.addEventListener("load", function () {
-
-
     /** We can use chrome.storage to get the highlights and list them there */
     chrome.tabs.query({active: true, lastFocusedWindow: true}, tabs => {
         let url = tabs[0].url;
@@ -11,7 +9,6 @@ window.addEventListener("load", function () {
 
             let currentText;
             for (let i = 0; i < highlights.length; i++){
-
 
                 currentText = highlights[i].highlightTextContent;
 
@@ -26,9 +23,6 @@ window.addEventListener("load", function () {
                 let highlightText = document.createElement("span");
                 highlightText.className = "highlightText";
 
-
-
-
                 /** If the text is short enough, just put the entire text in. Otherwise, break it up into "the starting part... and the ending part" fragments */
                 if (currentText.length < 40){
                     highlightText.innerHTML = '"' + currentText.substring(0, 32) + "... " + '"';
@@ -36,27 +30,13 @@ window.addEventListener("load", function () {
                     highlightText.innerHTML = '"' + currentText.substring(0, 32) + "... " + '"';
                 }
 
-
                 highlightTextDiv.appendChild(highlightText);
-
-
-
-                //highlightTextDiv.onclick = jumpTo(highlights[i].uniqueID);
 
                 spacingDiv.appendChild(highlightTextDiv);
                 document.body.appendChild(spacingDiv);
 
-
-                /** In order to correctly do this... I think I need to look at message passing. It's definitely way more efficient than whatever I'm doing now... */ /*
-                highlightTextDiv.addEventListener("click", function () {
-                    chrome.tabs.executeScript({code: "console.log('you clicked it bitch');"}, function () {
-
-                    })
-                }) */
-
-
+                /** In order to correctly do this... I think I need to look at message passing. It's definitely way more efficient than whatever I'm doing now... */
             }
-
 
             /** Adjusts the header to correctly display the number of highlights */
             let numOfHighlightsHeader = document.getElementById("numOfHighlights");
@@ -67,14 +47,11 @@ window.addEventListener("load", function () {
                     "           <img id=\"homeImg\" src=\"images/popup_html/home.png\" >\n" +
                     "       </a>";
             }
-
         })
-
-
-        // use `url` here inside the callback because it's asynchronous!
     });
 })
 
+/** nOT USED */
 function jumpTo(classId){
     window.scrollTo(0, window.document.querySelector(".AKNOWTATE-HIGHLIGHT " + classId).offsetTop);
 }

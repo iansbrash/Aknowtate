@@ -11,8 +11,6 @@ function initializeUIFunctions() {
             openColorPopup();
         })
         document.getElementById("ak4").addEventListener("click", function (thisEvent) {
-            //thisEvent.stopPropagation();
-            //closeWindow();
             deleteHighlight();
         })
 
@@ -110,5 +108,4 @@ function initializeUIFunctions() {
 
     })
 }
-
 /** End code to initialize UI functions */

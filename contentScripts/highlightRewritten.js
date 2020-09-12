@@ -27,6 +27,8 @@
 /** Instead of highlighting each node as we go, put all nodes we need to highlight into an array, and once we're done, iterate through the array and highlight.
  *  This lets us check if a node has already been highlighted (and will let us cancel the actual highlighting operation */
 
- function highlightRewritten(selection, container, anchorNode, focusNode, anchorOffset, focusOffset, highlightColor, uniqueId){
+/** TODO: To-do. */
 
+ function highlightRewritten(selection, container, anchorNode, focusNode, anchorOffset, focusOffset, highlightColor, uniqueId){
+    // NOTE: Look at highlightTry6 for the current highlight function
 }

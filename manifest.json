@@ -17,7 +17,6 @@
       "js": [
         "jquery-3.5.1.min.js",
         "/contentScripts/highlightTry6.js",
-        "/contentScripts/changeColor.js",
         "/contentScripts/storeHighlights.js",
         "/contentScripts/highlightHelper.js",
         "/contentScripts/loadHighlights.js",

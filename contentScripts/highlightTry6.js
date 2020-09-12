@@ -3,8 +3,8 @@ function highlightViaSwim(selection, container, anchorNode, focusNode, anchorOff
     console.log("highlightViaSwim called");
     console.log("anchorNode.parentNode.hasChildNodes(): " + anchorNode.parentNode.hasChildNodes());
 
-    console.log("container.textContent: " + container.textContent);
-    console.log("container.parentNode.textContent: " + container.parentNode.textContent);
+    //console.log("container.textContent: " + container.textContent);
+    //console.log("container.parentNode.textContent: " + container.parentNode.textContent);
 
 
     /** Instantiates variables */
@@ -44,13 +44,11 @@ function highlightViaSwim(selection, container, anchorNode, focusNode, anchorOff
         }
         if (!anchorOffset){
             console.log("Missing anchorOffset... attempting to replace.");
-            //aOff = selection.anchorOffset;
             /** The anchorOffset is usually missing when it is zero... */
             aOff = 0;
         }
         if (!focusOffset){
             console.log("Missing focusOffset... attempting to replace.");
-            //fOff = selection.focusOffset;
             /** The focusOffset is usually missing when it is zero... */
             fOff = 0;
         }
@@ -150,10 +148,8 @@ function highlightViaSwim(selection, container, anchorNode, focusNode, anchorOff
         clearSelection();
     }
 
-
     /**
      * This function, paired with swimDownFromNode, does all the highlighting in between the aNode and fNode.
-     *  I'm honestly too fucking lazy to thoroughly to explain how this works.
      *  The gist is it starts at the aNode, then tests all of its siblings to see if they are both after the aNode and before the fNode
      *  If they're in the middle, it calls the swimDown function which pretty much gets to the very bottom of that sibling's DOM tree (where the text nodes are)
      *  and replaces said text nodes with a span with style.background set to color.
@@ -212,7 +208,6 @@ function highlightViaSwim(selection, container, anchorNode, focusNode, anchorOff
         if (node.nodeType === Node.TEXT_NODE){
 
             let highlightNode = returnHighlightedSpan(node.textContent.substring(startOffset, endOffset));
-
 
             /** Creates the popupSpan that I previously used. Trying to remove this now... never mind */
             let popupSpan = document.createElement("span");
@@ -278,22 +273,11 @@ function highlightViaSwim(selection, container, anchorNode, focusNode, anchorOff
                 console.log("new absolute offset: " + absoluteStartOffset);
                 console.log("pNode.textContent before storage call: " + pNode.textContent);
 
-                /*
-                beforeText = document.createTextNode(pNode.textContent.substring(0, absoluteOffset));
-                afterText = document.createTextNode(pNode.textContent.substring(absoluteFocusOffset, pNode.textContent.length));
-                highlightNode = returnHighlightedSpan(pNode.textContent.substring(absoluteOffset, absoluteFocusOffset));
-
-                 */
-
-
                 pNode.insertBefore(beforeText, node);
                 pNode.insertBefore(highlightNode, node);
                 pNode.insertBefore(afterText, node);
 
-
-
-
-                /** This block of code seems to fuck up the pNode's sturcture somehow... no idea why */
+                /** This block of code seems to mess up the pNode's sturcture somehow... no idea why */
                 chrome.storage.sync.get(window.location.href, function (values) {
                     console.log("pNode.textContent after storage call: " + pNode.textContent);
                     let highlights = values[window.location.href];
@@ -308,7 +292,6 @@ function highlightViaSwim(selection, container, anchorNode, focusNode, anchorOff
                         }
                     })
 
-
                     /** This returns incorrectly... */
                     console.log("pNode.textContent, this errs: " + pNode.textContent);
 
@@ -317,22 +300,16 @@ function highlightViaSwim(selection, container, anchorNode, focusNode, anchorOff
                     highlights[indexToEdit].hasCorrectedOffsets = true;
 
                     chrome.storage.sync.set({[window.location.href]: highlights}, function () {
-                        console.log("Holy shit that was a long ass process. Jesus. Just finished the special case absolute offset finding function");
+                        console.log("That was a long process. Just finished the special case absolute offset finding function");
                         console.log("pNode.textContent after doing eveyrthing: " + pNode.textContent);
                         console.log("node.textContent: " + node.textContent);
                         console.log("pNode.parentNode.textContent: " + pNode.parentNode.textContent);
-
-
                     })
                 })
-
-
             } else if (isAnchorNodeAndFocusNodeSameNode && node.parentNode.className === "aknowtateDOMSaver"){
 
                 console.log("SECOND ELSEIF STATEMENT: isAnchorNodeAndFocusNodeSameNode && node.parentNode.className === \"aknowtateDOMSaver\"");
-
                 let beforeLength = 0;
-
                 console.log("here is the startOffset we're working with. In the second ELSE IF statement: " + startOffset);
 
                 $(node.parentNode.childNodes).each(function (index, element) {
@@ -345,6 +322,7 @@ function highlightViaSwim(selection, container, anchorNode, focusNode, anchorOff
                         beforeLength += element.textContent.length
                     }
                 })
+
                 console.log("exited jquery each");
                 console.log("node.textContent; " + node.textContent);
                 console.log("node.parentNode.textContent: " + node.parentNode.textContent);
@@ -370,29 +348,11 @@ function highlightViaSwim(selection, container, anchorNode, focusNode, anchorOff
                 nodeParent.insertBefore(afterText, node);
             }
             else {
-                console.log("ELSE STATEMENT: At the very end. At the else. you should see this whenthe offset is kinda fked ")
-
-                /*
-                beforeText = document.createTextNode(node.parentNode.textContent.substring(0, startOffset));
-                afterText = document.createTextNode(node.parentNode.textContent.substring(endOffset, node.parentNode.textContent.length));
-                highlightNode = returnHighlightedSpan(node.parentNode.textContent.substring(startOffset, endOffset));
-
-                 */
-
-                /** What is at the top of this function:
-                 * let highlightNode = returnHighlightedSpan(node.textContent.substring(startOffset, endOffset));
-                 * let beforeText = document.createTextNode(node.textContent.substring(0, startOffset));
-                   let afterText = document.createTextNode(node.textContent.substring(endOffset, node.textContent.length));
-                 */
-
-
+                console.log("ELSE STATEMENT: At the very end. Noot good.")
                 nodeParent.insertBefore(beforeText, node);
                 nodeParent.insertBefore(highlightNode, node);
                 nodeParent.insertBefore(afterText, node);
             }
-
-
-
         } else if (!node.hasChildNodes()){
             ;
         } else {
@@ -407,15 +367,12 @@ function highlightViaSwim(selection, container, anchorNode, focusNode, anchorOff
         highlightIndividualNode(0, node.textContent.length, node);
     }
 
-
     /** Feed this function a string or a textNode and it effectively highlights it and returns it to you. Useful because it cuts down the code I have to write since I need to do this a lot */
     function returnHighlightedSpan(textNode){
         let replacementNode = document.createElement("span");
 
         /** If // Else to allow both TextNode and String input */
         if (typeof textNode === 'string' || textNode instanceof String){
-
-
 
             /** The text node */
             let replacementText = document.createTextNode(textNode);
@@ -435,12 +392,8 @@ function highlightViaSwim(selection, container, anchorNode, focusNode, anchorOff
             return replacementNode;
         }
         else {
-
-
-
             /** The text node */
             let replacementText = document.createTextNode(textNode.textContent);
-
 
             /** The parent of the text node which will be highlighted */
             let highlightTextSpan = document.createElement("span");
@@ -472,7 +425,7 @@ function highlightViaSwim(selection, container, anchorNode, focusNode, anchorOff
         & Node.DOCUMENT_POSITION_FOLLOWING ? node1 : node2;
     }
 
-    /** Some old shit I never used. Maybe I'll revisit this! */
+    /** Something I never used. Maybe I'll revisit this! */
     function toggleShowForPopup(thisID){
         console.log("Here is the thisID passed to toggleShowForPopup: " + thisID);
         console.log("Here is the className we are finding: " + "popupFromFile " + thisID);
